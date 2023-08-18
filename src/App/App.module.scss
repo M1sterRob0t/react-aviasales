@@ -1,0 +1,22 @@
+.app {
+  width: 756px;
+  margin: 0 auto;
+}
+
+.app__body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.app__left-column {
+  flex-shrink: 0;
+}
+
+.app__right-column {
+  flex-shrink: 0;
+}
+
+.app__sorting {
+  margin-bottom: 20px;
+}
