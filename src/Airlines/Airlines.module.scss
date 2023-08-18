@@ -1,0 +1,17 @@
+.airlines {
+  width: 502px;
+
+  @media(max-width: 550px) {
+    width: 100%;
+  }
+}
+
+.airlines__list {
+  margin: 0;
+  padding: 0;
+}
+
+.airlines__item {
+  list-style: none;
+  margin-bottom: 21px;
+}
