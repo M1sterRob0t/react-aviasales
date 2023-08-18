@@ -71,6 +71,10 @@
   transition-duration: 0.1s;
   transition-timing-function: linear;
 
+  &:hover {
+    background-color: #F1FCFF;
+  }
+
   @media(max-width: 820px) {
     text-align: center;
   }
@@ -94,7 +98,7 @@
   overflow: hidden;
 
   &:focus + .sorting__label {
-    //outline: 3px solid #2196F3;
+    outline: 1px solid #2196F3;
   }
 }
 
