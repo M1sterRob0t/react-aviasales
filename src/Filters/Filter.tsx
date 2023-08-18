@@ -27,11 +27,13 @@ const Filter = {
     value: '3',
   },
 };
-
-export default function Filters(): JSX.Element {
+interface IFiltersProps {
+  className: string;
+}
+export default function Filters({ className }: IFiltersProps): JSX.Element {
   const filters = Object.values(Filter);
   return (
-    <section className={classes['filters']}>
+    <section className={`${className} ${classes['filters']}`}>
       <h2 className={classes['filters__title']}>Количество пересадок</h2>
       <ul className={classes['filters__list']}>
         {filters.map((filter) => (

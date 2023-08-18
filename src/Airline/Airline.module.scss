@@ -6,6 +6,10 @@
   border-radius: 5px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
   background-color: #FFFFFF;
+
+  @media(max-width: 545px) {
+    padding: 10px;
+  }
 }
 
 .airline__header {
@@ -50,6 +54,10 @@
   &:not(:last-child) {
     margin-bottom: 5px;
   }
+
+  @media(max-width: 545px) {
+    //font-size: 10px;
+  }
 }
 
 .flight {
@@ -73,6 +81,10 @@
   line-height: 18px;
   color: #A0B0B9;
   text-transform: uppercase;
+
+  @media(max-width: 545px) {
+    font-size: 10px;
+  }
 }
 
 .flight__schedule-table-row {
@@ -83,6 +95,12 @@
   line-height: 21px;
   color: #4A4A4A;
   text-transform: uppercase;
+
+  @media(max-width: 545px) {
+    display: flex;
+    align-items: flex-start;
+    font-size: 12px;
+  }
 }
 
 .flight__schedule-table-cell,
@@ -93,5 +111,10 @@
 
   &:not(:last-child) {
     margin-right: 30px;
+  }
+
+  @media(max-width: 545px) {
+    height: auto;
+    width: 25%;
   }
 }

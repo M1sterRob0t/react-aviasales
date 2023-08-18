@@ -1,5 +1,9 @@
 .sorting {
   width: 502px;
+
+  @media(max-width: 820px) {
+    width: 100%;
+  }
 }
 
 .sorting__list {
@@ -31,6 +35,10 @@
   &:last-child {
     border-radius: 0 5px 5px 0;
   }
+
+  @media(max-width: 820px) {
+    width: 100%;
+  }
 }
 
 .sorting__item:first-child .sorting__label {
@@ -53,13 +61,23 @@
   justify-content: center;
   align-items: center;
 
+  box-sizing: border-box;
   height: 47px;
+  padding: 10px;
   cursor: pointer;
   user-select: none;
   border: 1px solid #DFE5EC;
 
   transition-duration: 0.1s;
   transition-timing-function: linear;
+
+  @media(max-width: 820px) {
+    text-align: center;
+  }
+
+  @media(max-width: 545px) {
+    height: 100%;
+  }
 }
 
 

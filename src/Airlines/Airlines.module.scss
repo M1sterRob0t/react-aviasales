@@ -1,5 +1,9 @@
 .airlines {
   width: 502px;
+
+  @media(max-width: 550px) {
+    width: 100%;
+  }
 }
 
 .airlines__list {
