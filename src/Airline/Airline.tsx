@@ -25,22 +25,24 @@ export default function Airline({ className }: IAirlineProps): JSX.Element {
           <li className={`${classes['airline__flights-item']} ${classes['flight']}']`}>
             <div className={classes['flight__schedule']}>
               <table className={classes['flight__schedule-table']}>
-                <tr className={classes['flight__schedule-table-row']}>
-                  <th className={classes['flight__schedule-table-header']}>MOW – HKT</th>
-                  <th className={classes['flight__schedule-table-header']}>В пути</th>
-                  <th className={classes['flight__schedule-table-header']}>2 пересадки</th>
-                </tr>
-                <tr className={classes['flight__schedule-table-row']}>
-                  <td className={classes['flight__schedule-table-cell']}>10:45 – 08:00</td>
-                  <td className={classes['flight__schedule-table-cell']}>21ч 15м</td>
-                  <td className={classes['flight__schedule-table-cell']}>HKG, JNB</td>
-                </tr>
+                <tbody>
+                  <tr className={classes['flight__schedule-table-row']}>
+                    <th className={classes['flight__schedule-table-header']}>MOW – HKT</th>
+                    <th className={classes['flight__schedule-table-header']}>В пути</th>
+                    <th className={classes['flight__schedule-table-header']}>2 пересадки</th>
+                  </tr>
+                  <tr className={classes['flight__schedule-table-row']}>
+                    <td className={classes['flight__schedule-table-cell']}>10:45 – 08:00</td>
+                    <td className={classes['flight__schedule-table-cell']}>21ч 15м</td>
+                    <td className={classes['flight__schedule-table-cell']}>HKG, JNB</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </li>
           <li className={`${classes['airline__flights-item']} ${classes['flight']}']`}>
-            <div className={classes['flight__schedule']}>
-              <table className={classes['flight__schedule-table']}>
+            <table className={classes['flight__schedule-table']}>
+              <tbody>
                 <tr className={classes['flight__schedule-table-row']}>
                   <th className={classes['flight__schedule-table-header']}>MOW – HKT</th>
                   <th className={classes['flight__schedule-table-header']}>В пути</th>
@@ -51,8 +53,8 @@ export default function Airline({ className }: IAirlineProps): JSX.Element {
                   <td className={classes['flight__schedule-table-cell']}>13ч 30м</td>
                   <td className={classes['flight__schedule-table-cell']}>HKG</td>
                 </tr>
-              </table>
-            </div>
+              </tbody>
+            </table>
           </li>
         </ul>
       </div>
