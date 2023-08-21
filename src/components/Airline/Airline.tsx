@@ -1,15 +1,22 @@
-import companyLogo from './images/company-logo.png';
+import { Flight } from '../Flight/Flight';
+import { TTicket } from '../../types';
+
 import classes from './Airline.module.scss';
+import companyLogo from './images/company-logo.png';
 
 interface IAirlineProps {
   className: string;
+  ticket: TTicket;
 }
 
-export default function Airline({ className }: IAirlineProps): JSX.Element {
+export default function Airline({ className, ticket }: IAirlineProps): JSX.Element {
+  const formattedPrice =
+    ticket.price / 1000 >= 1 ? `${Math.floor(ticket.price / 1000)} ${ticket.price % 1000}` : ticket.price;
+
   return (
     <li className={`${className} ${classes['airline']}`}>
       <div className={classes['airline__header']}>
-        <div className={classes['airline__price']}>13 400 &#8381;</div>
+        <div className={classes['airline__price']}>{formattedPrice} &#8381;</div>
         <div className={classes['airline__company-logo']}>
           <img
             className={classes['airline__logo-image']}
@@ -22,40 +29,9 @@ export default function Airline({ className }: IAirlineProps): JSX.Element {
       </div>
       <div className={classes['airline__body']}>
         <ul className={classes['airline__flights-list']}>
-          <li className={`${classes['airline__flights-item']} ${classes['flight']}']`}>
-            <div className={classes['flight__schedule']}>
-              <table className={classes['flight__schedule-table']}>
-                <tbody>
-                  <tr className={classes['flight__schedule-table-row']}>
-                    <th className={classes['flight__schedule-table-header']}>MOW – HKT</th>
-                    <th className={classes['flight__schedule-table-header']}>В пути</th>
-                    <th className={classes['flight__schedule-table-header']}>2 пересадки</th>
-                  </tr>
-                  <tr className={classes['flight__schedule-table-row']}>
-                    <td className={classes['flight__schedule-table-cell']}>10:45 – 08:00</td>
-                    <td className={classes['flight__schedule-table-cell']}>21ч 15м</td>
-                    <td className={classes['flight__schedule-table-cell']}>HKG, JNB</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </li>
-          <li className={`${classes['airline__flights-item']} ${classes['flight']}']`}>
-            <table className={classes['flight__schedule-table']}>
-              <tbody>
-                <tr className={classes['flight__schedule-table-row']}>
-                  <th className={classes['flight__schedule-table-header']}>MOW – HKT</th>
-                  <th className={classes['flight__schedule-table-header']}>В пути</th>
-                  <th className={classes['flight__schedule-table-header']}>1 пересадка</th>
-                </tr>
-                <tr className={classes['flight__schedule-table-row']}>
-                  <td className={classes['flight__schedule-table-cell']}>11:20 – 00:50</td>
-                  <td className={classes['flight__schedule-table-cell']}>13ч 30м</td>
-                  <td className={classes['flight__schedule-table-cell']}>HKG</td>
-                </tr>
-              </tbody>
-            </table>
-          </li>
+          {ticket.segments.map((segment) => (
+            <Flight className={classes['airline__flights-item']} segment={segment} key={segment.date} />
+          ))}
         </ul>
       </div>
     </li>
