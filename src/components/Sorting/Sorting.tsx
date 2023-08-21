@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useSelector, useDispatch } from 'react-redux';
 
 import { changeSortTypeAction } from '../../store/reducer';
