@@ -48,7 +48,7 @@ export type TServerTicket = {
 };
 
 export type TTicket = {
-  id: number;
+  id: string;
   price: number;
   carrier: string;
   segments: TSegment[];
