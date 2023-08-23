@@ -1,9 +1,10 @@
 import { nanoid } from 'nanoid';
-import type { AxiosInstance, AxiosError } from 'axios';
+import { AxiosError } from 'axios';
+import type { AxiosInstance } from 'axios';
 
 import type { TTicket, TServerTicket, TThunkActionResult, TThunkAppDispatch } from '../types';
 
-import { setTicketsAction } from './reducer';
+import { setTicketsAction, toggLoadingAction, changeLoadingProgressAction, setErrorAction } from './reducer';
 
 type TServerGetTicketsResponse = {
   stop: boolean;
@@ -22,37 +23,43 @@ async function fetchTickets(
 ): Promise<TTicket[]> {
   try {
     const { data } = await api.get<TServerGetTicketsResponse>(`/tickets?searchId=${searchId}`);
-
     const newTickets = data.tickets.map((ticket) => ({ ...ticket, id: nanoid() }));
     const tickets: TTicket[] = [...prevTickets, ...newTickets];
+
+    if (!prevTickets.length) dispatch(toggLoadingAction());
+
     dispatch(setTicketsAction(tickets));
+    dispatch(changeLoadingProgressAction(tickets.length));
 
     if (!data.stop) {
       return await fetchTickets(searchId, api, tickets, dispatch);
     } else {
-      console.log(tickets);
-      console.log('stop');
       return tickets;
     }
-  } catch (error) {
-    const { response } = error as AxiosError;
-
+  } catch (err) {
+    const error = err as AxiosError;
+    const { response } = error;
+    console.log(error);
     if (response && response.status === 500) {
       return await fetchTickets(searchId, api, prevTickets, dispatch);
+    } else {
+      dispatch(toggLoadingAction());
+      dispatch(setErrorAction(error));
+      return Promise.resolve(prevTickets);
     }
-    console.log('return prevTickets');
-    return prevTickets;
   }
 }
 
 export function fetchAllTickets(): TThunkActionResult {
   return async function (dispatch, _getState, api): Promise<void> {
-    const searhResponse = await api.get<TServerGetSearchIdResponse>('/search');
-    const searchId = searhResponse.data.searchId;
-
-    /* const allTickets = await fetchTickets(searchId, api, [], dispatch);
-    dispatch(setTicketsAction(allTickets)); */
-
-    fetchTickets(searchId, api, [], dispatch);
+    try {
+      const searhResponse = await api.get<TServerGetSearchIdResponse>('/search');
+      const searchId = searhResponse.data.searchId;
+      fetchTickets(searchId + 'sad', api, [], dispatch);
+    } catch (err) {
+      const error = err as AxiosError;
+      dispatch(toggLoadingAction());
+      dispatch(setErrorAction(error));
+    }
   };
 }

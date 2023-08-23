@@ -48,3 +48,5 @@ export const FilterType: TFilterType = {
     value: 'three',
   },
 };
+
+export const TOTAL_TICKET_AMOUNT = 8805;

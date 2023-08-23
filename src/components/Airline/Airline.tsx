@@ -9,9 +9,23 @@ interface IAirlineProps {
   ticket: TTicket;
 }
 
+function getFormattedPrice(price: number): string {
+  const thousands = Math.floor(price / 1000);
+  const rest = price % 1000;
+  let formattedPrice = '';
+
+  if (thousands) formattedPrice += thousands;
+
+  if (rest === 0) formattedPrice += ' 000';
+  else if (rest < 10) formattedPrice += ` 00${rest}`;
+  else if (rest < 100) formattedPrice += ` 0${rest}`;
+  else formattedPrice += ` ${rest}`;
+
+  return formattedPrice;
+}
+
 export default function Airline({ className, ticket }: IAirlineProps): JSX.Element {
-  const formattedPrice =
-    ticket.price / 1000 >= 1 ? `${Math.floor(ticket.price / 1000)} ${ticket.price % 1000}` : ticket.price;
+  const formattedPrice = getFormattedPrice(ticket.price);
 
   return (
     <li className={`${className} ${classes['airline']}`}>

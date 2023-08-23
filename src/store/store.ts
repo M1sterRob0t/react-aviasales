@@ -13,5 +13,6 @@ export default configureStore({
       thunk: {
         extraArgument: createApi(),
       },
+      serializableCheck: false,
     }),
 });

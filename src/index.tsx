@@ -9,6 +9,7 @@ import { fetchAllTickets } from './store/async-actions';
 import { TThunkAppDispatch } from './types';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+
 (store.dispatch as TThunkAppDispatch)(fetchAllTickets());
 
 root.render(
