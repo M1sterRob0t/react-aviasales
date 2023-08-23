@@ -39,7 +39,7 @@ async function fetchTickets(
   } catch (err) {
     const error = err as AxiosError;
     const { response } = error;
-    console.log(error);
+
     if (response && response.status === 500) {
       return await fetchTickets(searchId, api, prevTickets, dispatch);
     } else {
