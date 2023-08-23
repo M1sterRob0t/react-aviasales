@@ -1,7 +1,7 @@
 import axios from 'axios';
 import type { AxiosInstance } from 'axios';
 
-const BASE_URL = 'https://aviasales-test-api.kata.academyy';
+const BASE_URL = 'https://aviasales-test-api.kata.academy';
 const TIMEOUT = 5000;
 
 export function createApi(): AxiosInstance {

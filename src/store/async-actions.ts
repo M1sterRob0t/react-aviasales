@@ -55,7 +55,7 @@ export function fetchAllTickets(): TThunkActionResult {
     try {
       const searhResponse = await api.get<TServerGetSearchIdResponse>('/search');
       const searchId = searhResponse.data.searchId;
-      fetchTickets(searchId + 'sad', api, [], dispatch);
+      fetchTickets(searchId, api, [], dispatch);
     } catch (err) {
       const error = err as AxiosError;
       dispatch(toggLoadingAction());
