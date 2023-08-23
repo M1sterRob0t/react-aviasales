@@ -1,4 +1,4 @@
-import type { AxiosInstance } from 'axios';
+import type { AxiosInstance, AxiosError } from 'axios';
 import type { ThunkAction, ThunkDispatch } from 'redux-thunk';
 
 import { flightsSlice } from './store/reducer';
@@ -20,7 +20,7 @@ export type TSort = {
 };
 
 export type TFilterType = {
-  [propertyName: string]: {
+  [propertyName in 'All' | 'One' | 'Two' | 'Three' | 'Zero']: {
     text: string;
     name: string;
     value: string;
@@ -48,7 +48,7 @@ export type TServerTicket = {
 };
 
 export type TTicket = {
-  id: number;
+  id: string;
   price: number;
   carrier: string;
   segments: TSegment[];
@@ -58,6 +58,10 @@ export type TFlightsState = {
   sortType: TSort;
   filters: TFilter[];
   tickets: TTicket[];
+  isDataLoadig: boolean;
+  loadingProgress: number;
+  currentTickets: TTicket[];
+  error: null | AxiosError;
 };
 
 export type TState = {
@@ -67,6 +71,10 @@ export type TState = {
 export type TChangeFilterTypeAction = ReturnType<typeof flightsSlice.actions.changeFilterTypeAction>;
 export type TChangeSortTypeAction = ReturnType<typeof flightsSlice.actions.changeSortTypeAction>;
 export type TSetTicketsAction = ReturnType<typeof flightsSlice.actions.setTicketsAction>;
+export type TToggleLoadingAction = ReturnType<typeof flightsSlice.actions.toggLoadingAction>;
+export type TChangeLoadingProgressAction = ReturnType<typeof flightsSlice.actions.changeLoadingProgressAction>;
+export type TSetErrorAction = ReturnType<typeof flightsSlice.actions.setErrorAction>;
+export type TActions = TToggleLoadingAction | TSetTicketsAction | TChangeLoadingProgressAction | TSetErrorAction;
 
-export type TThunkActionResult<R = Promise<void>> = ThunkAction<R, TState, AxiosInstance, TSetTicketsAction>;
-export type TThunkAppDispatch = ThunkDispatch<TState, AxiosInstance, TSetTicketsAction>;
+export type TThunkActionResult<R = Promise<void>> = ThunkAction<R, TState, AxiosInstance, TActions>;
+export type TThunkAppDispatch = ThunkDispatch<TState, AxiosInstance, TActions>;
